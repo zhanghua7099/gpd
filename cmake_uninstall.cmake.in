@@ -1,0 +1,22 @@
+# cmake_uninstall.cmake.in
+# Set the default installation prefix
+if(NOT CMAKE_INSTALL_PREFIX)
+    set(CMAKE_INSTALL_PREFIX "/usr/local" CACHE PATH "Default install path" FORCE)
+endif()
+
+if(NOT DEFINED CMAKE_INSTALL_PREFIX)
+    message(FATAL_ERROR "CMAKE_INSTALL_PREFIX is not defined")
+endif()
+
+message(STATUS "Uninstalling from: @CMAKE_INSTALL_PREFIX@")
+
+# Remove the installed files
+file(GLOB_RECURSE files_to_remove 
+    "@CMAKE_INSTALL_PREFIX@/include/gpd/*"
+    "@CMAKE_INSTALL_PREFIX@/lib/lib${PROJECT_NAME}_grasp_detector.*"
+)
+
+foreach(file ${files_to_remove})
+    message(STATUS "Removing ${file}")
+    file(REMOVE "${file}")
+endforeach()
